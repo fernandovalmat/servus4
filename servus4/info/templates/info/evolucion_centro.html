@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+{% block head %}
+<script src="{% url static 'lib/code/highcharts.js' %}"></script>
+<script src="{% url static 'lib/code/data.js' %}"></script>
+<script src="{% url static 'lib/code/series-label.js' %}"></script>
+<script src="{% url static 'lib/code/exporting.js' %}"></script>
+<script src="{% url static 'lib/code/export-data.js' %}" ></script>
+<script src="{% url static 'lib/code/accessibility.js' %}"></script>
+
+
+
+
+{% endblock%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    <div><header class="encabezado"><h3>{{idc.nombre_centro}}</h3></header></div>
+    
+    <nav class= "menu li">
+        <li><a href="../consumo_unidad_total/{{idc.idcentro}}">CONSUMO TOTAL</a></li>
+        <li><a href="../consumo_mensual_centro/{{idc.idcentro}}">CONSUMO MENSUAL</a></li>
+        <li><a href="../consumo_historico_centro/{{idc.idcentro}}">CONSUMO HISTORICO</a></li>
+        <li><a href="../evolucion_centro/{{idc.idcentro}}">COSTOS MENSUALES</a></li>
+        <li><a href="../medias/{{idc.idcentro}}">PROMEDIOS</a></li>
+    </nav>
+    <h2>OCTUBRE 2021 - COSTO MENSUAL : {{costo_octubre.costo__sum}}</h2>
+    
+    <h2>NOVIEMBRE 2021 - COSTO MENSUAL : {{costo_novimebre.costo__sum}}</h2>
+    
+    <h2>DICIEMBRE 2021 - COSTO MENSUAL : {{costo_diciembre.costo__sum}}</h2>
+
+    <h2>ENERO 2022 - COSTO MENSUAL : {{costo_enero.costo__sum}}</h2>
+    {% endblock %}
+</body>
+</html>

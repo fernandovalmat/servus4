@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+
+    <H3>REGISTRO DE MOVIMIENTOS TOTALES DEL HMNCK</H3>
+    {% for subareas in subareas %}
+
+    <a href="{{subareas.idcentro}}">{{subareas}}</a>
+    
+    {% endfor %}
+    <table>
+        <thead>
+            <tr>
+                <th>PRODUCTO</th>
+                <th>INGRESO TOTAL</th>
+                <th>EGRESO TOTAL</th>
+                <th>STOCK NCK</th>
+                <TH>CONSUMO PROMEDIO</TH>
+                <th>DURACION</th>
+            </tr> 
+        </thead>   
+    
+        <tbody>
+            <tr>{% for consumo in consumo %}
+                <td>{{consumo.producto}} </td>
+                <td>{{consumo.ingreso_nck}}</td>
+                <td>{{consumo.egreso_nck}}</td>
+                <td>{{consumo.stock_nck}}</td>
+                <TD>{{consumo.promedio_nck}}</TD>
+                <TD>{{consumo.duracion_nck|floatformat:2}}</TD>
+            </tr>{% endfor %}
+        </tbody>
+    </table>
+    
+
+    {% endblock %}
+</body>
+</html>

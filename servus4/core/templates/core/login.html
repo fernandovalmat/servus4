@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCESO</title>
+</head>
+<body style="background-color: rgb(146, 172, 245);">
+
+    {% block content %}
+    {{usuario}}
+    <H2>INGRESE SU USUARIO Y CLAVE PARA OPERAR</H2>
+    <form action="" method="post">
+        {% csrf_token %}
+    
+        {{usuario_log}}
+    
+        <button type="submit">ACCEDER</button>
+    </form>
+
+
+    {% endblock %}
+</body>
+</html>

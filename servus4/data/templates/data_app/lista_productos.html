@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    {% block content %}
+
+    <div> <h3> </h3></div>
+    <table>
+        <thead>
+            <th>MEDICAMENTOS</th>
+            <th>PRECIO</th>
+        </thead>
+        <tbody>{% for med in med %}
+            <TD>{{med.nombre_producto}}</TD> 
+            <td>{{med.precio}}</td>
+        </tbody>{% endfor %}
+    </table>
+    
+
+    <div> <h3> </h3></div>
+    <table>
+        <thead>
+            <th>DESCARTABLES</th>
+            <th>PRECIO</th>
+        </thead>
+        <tbody>{% for des in des %}
+            <TD>{{des.nombre_producto}}</TD> 
+            <td>{{des.precio}}</td>
+        </tbody>{% endfor %}
+    </table>
+    
+ 
+
+    <div> <h3> </h3></div>
+    <table>
+        <thead>
+            <th>ALIMENTOS</th>
+            <th>PRECIO</th>
+        </thead>
+        <tbody>{% for alimentos in alimentos %}
+            <TD>{{alimentos.nombre_producto}}</TD> 
+            <td>{{alimentos.precio}}</td>
+        </tbody>{% endfor %}
+    </table>
+   
+
+    <div> <h3> </h3></div>
+    <table>
+        <thead>
+            <th>SOLUCIONES</th>
+            <th>PRECIO</th>
+        </thead>
+        <tbody>{% for soluciones in soluciones %}
+            <TD>{{soluciones.nombre_producto}}</TD> 
+            <td>{{soluciones.precio}}</td>
+        </tbody>{% endfor %}
+    </table>
+    
+
+    <div> <h3> </h3></div>
+    <table>
+        <thead>
+            <th>OTROS</th>
+            <th>PRECIO</th>
+        </thead>
+        <tbody>{% for otros in otros %}
+            <TD>{{otros.nombre_producto}}</TD> 
+            <td>{{otros.precio}}</td>
+        </tbody>{% endfor %}
+    </table>
+    
+
+    {% endblock %}
+</body>
+</html>

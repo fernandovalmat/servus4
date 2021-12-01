@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Agregar producto</title>
+</head>
+{% block content%}
+<body>
+    <form action= "{% url 'guardar_producto' %}" method="POST">
+        {% csrf_token %}
+        {{producto.as_p}}
+    <button type="submit">Guardar Producto</button> 
+    </form>
+
+    <aside>
+    {% for productos in productos %}
+    <ul>
+        <li>{{productos.idproductos}} {{productos.nombre_producto}}</li> 
+    </ul>
+    {% endfor %}
+    </aside>
+</body>
+{% endblock %}
+</html>

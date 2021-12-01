@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    {% for stock in stock %}
+    <form action="../../inf/ciclico_stock/{{id}}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{stock.stock_umaad}}" name='sd1'>
+        <input type="number" name='nc'>
+        <button type="submit">AJUSTAR STOCK</button>
+    </form>
+
+    <a href= "../calculo_stock">VOLVER</a>
+    {% endfor %}
+    
+    
+
+    {% endblock %}
+    
+</body>
+</html>

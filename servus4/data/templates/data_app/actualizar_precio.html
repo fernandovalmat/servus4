@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+{% block content %}
+
+
+<body>
+    <form action='.' method="POST">
+        {% csrf_token %} 
+        Producto:
+        <select name='idproducto'>
+            {% for prod in prod %}
+            <option value={{prod.idproductos}}> {{prod.nombre_producto}} </option>
+            {% endfor %}
+        </select>    
+        Nuevo precio: <input type='number' name='nuevo_precio'>
+        <button type="submit">Actualizar</button>
+    </form>
+       
+    <table>
+        <thead>
+            <TR>
+                <TD>INSUMO</TD>
+                <TD>PRECIO</TD>
+            </TR>
+        </thead>
+        <tbody>
+            <TR>{% for prod in prod %}
+                <TD>{{prod.nombre_producto}}</TD>
+                <td>{{prod.precio}}</td>
+            </TR>{% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}
+</html>

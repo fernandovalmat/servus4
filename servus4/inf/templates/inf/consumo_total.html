@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    
+    <H3>REGISTRO DE MOVIMIENTOS TOTALES DE LA UMAAD</H3>
+
+     <table>
+        <thead>
+            <tr>
+                <th>PRODUCTO</th>
+                <th>INGRESO TOTAL</th>
+                <th>EGRESO TOTAL</th>
+            </tr> 
+        </thead>   
+    
+        <tbody>
+            <tr>{% for consumo in consumo %}
+                <td>{{consumo.producto}} </td>
+                <td>{{consumo.ingreso_umaad}}</td>
+                <td>{{consumo.egreso_umaad}}</td>
+            </tr>{% endfor %}
+        </tbody>
+    </table>
+    
+
+    {% endblock %}
+</body>
+</html>

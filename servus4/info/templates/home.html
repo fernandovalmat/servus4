@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    <div><h3>RESUMENES</h3></div>
+    <DIV> <a href="info/resumen_centros/">CENTROS: CONSUMOS Y GASTOS</a></DIV>
+    <DIV><H3></H3></DIV>
+    <DIV><a href="info/resumen_productos/">PRODUCTOS: CONSUMOS Y GASTOS</a> </DIV>
+
+    <div> <h3>PANEL DE CONTROL UMAAD Y NCK</h3></div>
+    <table>
+        <thead>
+         <tr>
+            <td><a href="info/consumo_total">UMAAD - PANEL</a></td>
+            <td><a href="info/consumo_interno_nck_total">NCK - PANEL</a></td>
+         </tr>
+        </thead>
+    </table>
+
+    <div><h3>STOCK UMAAD Y NCK</h3></div>
+    <table>
+        <td><a href="info/calculo_stock">STOCK UMAAD</a></td>
+        <td><a href="info/stock_vd/2">STOCK NCK</a></td>
+    </table>
+
+    <div><h3>ACCESO A PANEL DE CONTROL HOSPITALES, UDPS, CAPS Y OTROS</h3></div>
+     <table>
+        <thead>
+         <tr>
+           
+           
+            <td><a href="info/consumo_centro">PANEL DE CONTROL POR CENTRO</a></td>
+            
+        </tr>   
+        </thead>
+        
+    </table>
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}'>
+    <title>OPERACIONES</title>
+</head>
+<body>
+    {% block content %}
+    <h2>REGISTRO DE INGRESOS Y EGRESOS</h2>
+    <h4>Cargue los datos solicitados para generar un nuevo remito.</h4>
+
+<form action="." method="post">
+    {% csrf_token %}
+    {{nuevo_remito}}
+    <button type="submit">GENERAR REMITO</button>
+</form>
+
+
+<div>Buscar remito</div>
+<form action="." method="post">
+    {% csrf_token %}
+    <input type="number" name="idr2">
+    <button>BUSCAR REMITO</button>
+</form>
+
+{% for remito2 in remito2 %}
+<a href="../../ops/edicion_dinamica/{{remito2.idremito}}">VER REMITO {{remito2.idremito}}</a>
+{% endfor %}
+
+
+<div></div>
+<h4>Ultimos remitos generados</h4>
+<table style= 'border: 1px, solid black'>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>ORIGEN</td>
+            <td>DESTINO</td>
+            <td>FECHA</td>
+            <td>TIPO</td>
+            <td>EDICION</td>
+            <td>BORRAR</td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>{% for remitos in remitos %}
+        <td>{{remitos.idremito}}</td>
+        <td>{{remitos.origen}} </td>
+        <td>{{remitos.destino}}</td>
+        <td>{{remitos.fecha_remito}}</td>
+        <td>{{remitos.tipo}}</td>
+        <td><a href='../../ops/edicion_dinamica/{{remitos.idremito}}'>EDITAR</a></td>
+        <td><form action="." method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{remitos.idremito}}" name='idr'>
+            <button type="submit">CALCULAR COSTO</button>
+        </form>
+    </td>
+    <td>{{remitos.costo}}</td>
+    </tr>{% endfor %}
+    </tbody>
+
+</table>
+
+
+
+
+
+    {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+</head>
+{% block content%}
+<p>Seleccione el PROVEEDOR a borrar</p>
+
+<body>
+
+<form action="." method="POST">
+    {% csrf_token %}
+    <select name='proveedor'>
+        {%for proveedores in proveedores %}
+        <option value='{{proveedores.idproveedor}}'> ID: {{proveedores.idproveedor}} Nombre: {{proveedores.nombre_proveedor}} 
+        {% endfor %}
+    </select>
+    <button type='submit'>BORRAR PROVEEDOR</button>
+</form>
+
+    <p>proveedores disponibles para borrar</p>
+    {% for proveedores in proveedores %}
+    <ul>
+        <li>ID: {{proveedores.idproveedor}} Nombre: {{proveedores.nombre_proveedor}} </li> 
+    </ul>
+    {% endfor %}
+
+{% endblock %}
+</body>
+</html>

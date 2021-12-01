@@ -1,0 +1,130 @@
+codigo de stocks para vista dinamica
+#id del centro
+        idc=Centro.objects.get(idcentro=id)
+        idcp=Proveedor.objects.get(idproveedor=id)
+        
+        #remito del centro
+        remitos_ingreso=Remitos.objects.filter(destino=idc)
+        remitos_egreso=Remitos.objects.filter(origen=idcp)
+        
+        #renglones de esos remitos
+        renglones_ingreso=Renglones.objects.filter(nremito__in=remitos_ingreso)
+        renglones_egreso=Renglones.objects.filter(nremito__in=remitos_egreso)
+
+        #datos de origen y destino ajuste
+        destino_ajuste=Centro.objects.get(nombre_centro='ajustes')
+        origen_ajuste=Proveedor.objects.get(nombre_proveedor='ajustes')
+
+        rem_ing=Remitos.objects.filter(origen=origen_ajuste).filter(ajuste=True).filter(tipo='I').filter(fecha_remito='2021-01-01').filter(destino=idc).exists()
+        
+        if rem_ing==False: 
+            Remitos.objects.create(origen=origen_ajuste, ajuste=True, tipo='I', destino=idc, fecha_remito='2021-01-01')
+        
+        reg=Remitos.objects.filter(origen=id).filter(ajuste=True).filter(tipo='I').filter(fecha_remito='2021-01-01').filter(origen=origen_ajuste)
+
+        rem_eg=Remitos.objects.filter(origen=idcp).filter(ajuste=True).filter(tipo='E').filter(fecha_remito='2021-01-01').filter(destino=destino_ajuste).exists()
+        
+        if rem_eg==False:
+            Remitos.objects.create(origen=idcp, ajuste=True, tipo='E', destino=destino_ajuste, fecha_remito='2021-01-01')
+        rei=Remitos.objects.filter(origen=id).filter(ajuste=True).filter(tipo='E').filter(fecha_remito='2021-01-01')
+        
+        #hasta aca ok
+        #el codigo genera el remito, pero el seteo debe hacerse manualmente en las variables reg y rei para cada id.
+        
+
+        c=0
+        while c<2: #el else busca que el bucle try no se anule por la aparicion de un none
+            for i in range(1,500):
+                try:
+                    q=Productos.objects.get(idproductos=i)
+                    q2=Ies.objects.filter(centro=id).filter(producto=q).exists() 
+                    if q2==True:
+                        c=c+1
+                        pass
+                    else:
+                        Ies.objects.create(producto=q, centro=id)
+                        
+                        eg=Renglones.objects.create(producto=q, cantidad=0)
+                        eg.save()
+                        eg.nremito.add(reg) #el remito de egreso
+                        ig=Renglones.objects.create(producto=q, cantidad=0)
+                        ig.save()
+                        ig.nremito.add(rei) #el remito de ingreso
+                    c=c+1
+                except:
+                    c=c+1
+                    continue
+        c=0
+        while c<3:
+            for idproducto in range(1,500):
+                try:
+                    q=Productos.objects.get(idproductos=q)
+                    q2=Ies.objects.filter(centro=id).filter(producto=q).exists()
+                    if q2==True: #actualiza
+                        ingreso=renglones_ingreso.filter(producto=q).aggregate(Sum('cantidad'))
+                        egreso=renglones_egreso.filter(producto=q).aggregate(Sum('cantidad'))
+                        stock=sum(ingreso.values())+sum(egreso.values())
+                        Ies.objects.update(centro=id, producto=q, ingreso=ingreso, egreso=egreso, stock=stock)
+                        c=c+1
+                    else: #no existe el registro, lo crea
+                        Ies.objects.create(centro=id, producto=q, ingreso=0, egreso=0, stock=0)
+                        c=c+1
+                except:
+                    c=c+1
+                    continue
+
+
+#consumo mensuales
+#esta vista 
+        # mes=request.POST.get('mes')
+        # mes3=str(1)
+        # mes4=str()
+        # if request.method=='POST':
+        #     mes=mes
+        #     mes2=datetime.strptime(mes, '%Y-%m-%d')
+        #     mes3=mes2.strftime('%m')
+        #     mes4=mes2.strftime('%Y')
+
+        # idc=Centro.objects.get(idcentro=id)     
+        # remitos=Remitos.objects.all().filter(destino=id).filter(fecha_remito__month=mes3) #gobierna cambios
+        # renglones=Renglones.objects.filter(nremito__in=remitos) 
+        
+        # q=QuerySet()
+        
+        # q=Productos.objects.all()
+        # c=0
+
+        # while c<2: 
+        #     for i in range(1,500):
+        #         try:
+        #             q=Productos.objects.get(idproductos=i)
+        #             q2=Consumos_mensuales2.objects.filter(producto=q).filter(centro=idc).filter(fecha=mes).exists()
+                    
+        #             if q2 == True:
+        #                 egreso=Renglones.objects.filter(nremito__in=remitos).filter(producto=q).aggregate(total=Sum('cantidad'))
+        #                 cant=sum(egreso.values())
+        #                 Consumos_mensuales2.objects.filter(centro=idc).filter(producto=q).filter(fecha=mes).update(cantidad=cant)
+
+        #                 prod=Productos.objects.filter(idproductos=i).aggregate(Sum('precio'))
+                        
+        #                 can=Consumos_mensuales2.objects.filter(centro=idc).filter(producto=q).filter(fecha=mes).aggregate(Sum('cantidad'))
+        #                 prod2=sum(prod.values())
+        #                 can2=sum(can.values())
+        #                 costo2=prod2*can2
+
+        #                 Consumos_mensuales2.objects.filter(centro=idc).filter(producto=q).filter(fecha=mes).update(costo=costo2)
+                       
+        #                 c=c+1 
+        #             else: #create
+        #                 Consumos_mensuales2.objects.create(centro=idc, producto=q, cantidad=0, fecha=mes)
+        #                 c=c+1
+        #         except:
+
+        #             c=c+1 
+        #             continue
+        
+        # costo_total=Consumos_mensuales2.objects.filter(centro=id).filter(fecha=mes).aggregate(Sum('costo'))
+        # consumo=Consumos_mensuales2.objects.filter(centro=id).filter(fecha=mes).exclude(cantidad=0).order_by('producto')
+        
+        
+        # return render (request, 'info/consumo_mensual_centro.html', {'idc':idc, 'consumo':consumo, 'costo_total':costo_total, 'mes':mes3, 'mes4':mes4})

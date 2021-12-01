@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    
+    <div><header class="encabezado"><h4>{{centro.nombre_centro}}</h4></header></div>
+    
+    <nav class= "menu li">
+        <li><a href="../consumo_unidad_total/{{centro.idcentro}}">CONSUMO TOTAL</a></li>
+        <li><a href="../consumo_mensual_centro/{{centro.idcentro}}">CONSUMO MENSUAL</a></li>
+        <li><a href="../consumo_historico_centro/{{centro.idcentro}}">CONSUMO HISTORICO</a></li>
+        <li><a href="../evolucion_centro/{{centro.idcentro}}">COSTOS MENSUALES</a></li>
+        <li><a href="../medias/{{centro.idcentro}}">PROMEDIOS</a></li>
+    </nav>
+  
+
+    <form action="../../info/consumo_mensual_centro/{{centro.idcentro}}" method="post">
+        {% csrf_token %}
+        <select name='mes'>
+            <option value="1">ENERO </option>
+            <option value="2">FEBRERO </option>
+            <option value="3">MARZO</option>
+            <option value="4">ABRIL </option>
+            <option value="5">MAYO </option>
+            <option value="6">JUNIO</option>
+            <option value="7">JULIO </option>
+            <option value="8">AGOSTO </option>
+            <option value="9">SEPTIEMBRE</option>
+            <option value="10">OCTUBRE </option>
+            <option value="11">NOVIEMBRE </option>
+            <option value="12">DICIEMBRE</option>
+        </select>
+        <select name='anio'>
+            <option value="2021">2021 </option>
+            <option value="2022">2022 </option>
+        </select>
+        <button type="submit">VER</button>
+    </form>
+    
+    
+    <h4>RESULTADO DEL MES {{mes}} del año {{anio}}</h4>
+    
+    <h3><div>Total de consumo por unidad monetizado: {{costo.costo__sum}}</div></h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>PRODUCTO</th>
+                <th>CANTIDAD</Th>
+                <th>COSTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <TR>{% for consumo in consumo %}
+                <TD>{{consumo.producto}}</TD>
+                <TD>{{consumo.cantidad}}</TD>
+                <TD>{{consumo.costo}}</TD>
+            </TR>{% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endblock %}
+</body>
+</html>

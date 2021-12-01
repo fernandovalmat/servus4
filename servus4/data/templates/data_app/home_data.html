@@ -1,0 +1,57 @@
+{% extends 'core/home_un.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+
+    <title>DATA</title>
+</head>
+<body>
+{% block content %}
+
+<div><header class="encabezado"><h3>DATOS DEL SISTEMA</h3></header></div>
+<table>
+    <caption>DATOS</caption>
+    <thead>
+        <tr>
+            <th>DATOS SOBRE PRODUCTOS</th>
+        
+            <th>DATOS DE CENTROS</th>
+        
+            <th>DATOS DE PROVEEDORES</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+    <tr> <!--columnas-->
+        <td> <a href="data_app/borrar_producto">BORRAR PRODUCTO</a></td> <!--filas-->
+        <td> <a href="data_app/editar_centro">BORRAR CENTRO</a></td>
+        <td><a href="data_app/borrar_proveedor">BORRAR PROVEEDOR</a></td>
+    </tr>
+    
+    <tr> <!--columnas-->
+        <td><a href="data_app/agregar_producto">AGREGAR PRODUCTO</td> <!--filas-->
+        <td><a href="data_app/agregar_centro">AGREGR CENTROS</a> </td>
+        <td><a href="data_app/agregar_proveedor">AGREGAR PROVEEDOR</a> </td>
+        
+    </tr>
+    <tr>
+        <td><a href="data_app/actualizar_precio">ACTUALIZAR PRECIOS</a> </td>
+        <td></td>
+        <td></td>
+           
+    </tr>
+    <tr>
+        <td><a href="data_app/lista_productos">LISTA PRODUCTOS</a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+{% endblock %}
+</body>
+</html>

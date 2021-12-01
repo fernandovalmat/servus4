@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+  
+    <form action="." method="post">
+        {% csrf_token %}
+        <select name='idc'>
+            {% for centros in centros %}
+            <option value="{{centros.idcentro}}">{{centros.nombre_centro}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">VER RESUMEN</button>
+    </form>
+
+    <div><H3>COSTO TOTAL ACUMULADO: {{costo_total_acumulado.total}}</H3></div>
+    <div><h3>COSTO PROMEDIO : {{costo_promedio.total}}</h3></div>
+    
+    
+   
+    <table>
+        <caption>20 PRODUCTOS CON MAYOR IMPACTO ECONOMICO</caption>
+        <thead>
+            <td>MAYOR GASTO HISTORICO</td>
+            <Td>MAYOR GASTO PROMEDIO</Td>
+        </thead>
+        <tbody>
+            
+            <TD>
+                {% for producto_costo in producto_costo %}
+            <LI>{{producto_costo.producto}}</LI>
+        {% endfor %}
+            </TD>
+
+        <TD>{% for pcp in pcp %}
+            <li>{{pcp.producto}}</li>
+            {% endfor %}
+        </TD>
+        </tbody>
+    </table>
+    
+
+
+   <div><H2>2021</H2></div>
+   <DIV><h3>OCTUBRE :{{octubre.total}}</h3> </DIV>
+    <DIV><h3>NOVIEMBRE : {{noviembre.total}}</h3></DIV>
+  
+
+    {% endblock %}

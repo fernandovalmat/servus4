@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+
+    {% for centro in centro %}
+    <nav> 
+        <a href="../consumo_centro/{{centro.idcentro}}">{{centro.nombre_centro}} {{centro.area}}</a>
+    </nav>
+    {% endfor %}
+
+    
+
+    {% endblock %}
+</body>
+</html>

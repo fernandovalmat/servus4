@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    <nav class= 'menu li'>
+        <a href="../consumo_unidad_total/{{idc.idcentro}}">CONSUMO TOTAL</a>
+        <a href="../consumo_mensual_centro/{{idc.idcentro}}">CONSUMO MENSUAL</a>
+        <a href="../consumo_historico_centro/{{idc.idcentro}}">CONSUMO HISTORICO</a>
+        <a href="../evolucion_centro/{{idc.idcentro}}">MENSUALES</a>
+    </nav>
+    <h4>COSTO ACUMULADO: {{consumo_total.costo__sum}}</h4>
+    <h3><div>Total consumo por unidad</div></h3>
+    <table>
+        <thead>
+            <tr>
+                <th>PRODUCTO</th>
+                <th>CANTIDAD</th>
+                <th>COSTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>{% for consumo in consumo %}
+                <th>{{consumo.producto}}</th>
+                <th>{{consumo.cantidad}}</th>
+                <TH>{{consumo.costo}}</TH>
+            </tr>{% endfor %}
+        </tbody>
+    
+    </table>
+    {% endblock%}
+    C:\servus3\servus3\estadisticas\templates\est_app\consumo_unidad_total.html
+</body>
+</html>

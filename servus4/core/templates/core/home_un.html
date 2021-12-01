@@ -1,0 +1,41 @@
+
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>SERVUS - Inicio</title>
+</head>
+
+
+<div><header class="encabezado"><h3>SERVUS - Sistema de Registro e Informes - UMAAD - Municipio de Escobar</h3></header></div>
+
+
+
+<body style="background-color: rgb(146, 172, 245);">
+    <nav class="menu li">
+        <li><a href="http://127.0.0.1:8000/core/home_un/">INICIO</a></li> 
+        <li><a href="http://127.0.0.1:8000/ops/">OPERACIONES</a></li>
+        <li><a href="http://127.0.0.1:8000/data/">DATOS</a></li>
+        <li><a href="http://127.0.0.1:8000/info/">INFORMES</a></li>         
+    </nav>
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    <p>Bienvenido: {{ user.username }}</p>
+{% endif %}
+
+<p>OPERACIONES: seccion para generar remitos de ingreso y remito de egreso</p>
+<p>DATOS: seccion para dar de alta productos, proveedores y centros</p>
+<p>INFORMES: seccion para ver informes de consumos y costos</p>
+
+{% endblock %}
+</body>
+</html>

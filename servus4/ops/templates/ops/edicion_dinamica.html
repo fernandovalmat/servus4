@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edicion dinamica</title>
+</head>
+<body>
+    {% block content %}
+    
+    <h4>Remito numero: {{remito.idremito}}   |   {{remito.fecha_remito}}</h4>
+    <h3>Origen : {{remito.origen}}</h3>
+    <h3>Destino: {{remito.destino}}</h3>
+
+    <h3>Agregar renglones</h3>
+    <form action="../../ops/edicion_dinamica/{{id}}" method="post">
+        {% csrf_token %}
+        {{nuevo_renglon}}
+        <button type="submit">GRABAR RENGLON</button>
+    </form> 
+   
+    <form action="../../ops/edicion_dinamica/{{id}}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="calcular">
+        <button type="submit">CALCULAR COSTOS</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <td>PRODUCTO</td>
+                <td></td>
+                <td>CANTIDAD</td>
+                <td>MODIFICA CANTIDAD</td>
+                <td>COSTO</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>{% for renglones in renglones %}
+                <td>
+                    <form action="../../ops/edicion_dinamica/{{id}}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{renglones.idrenglon}}" name='borrar'>{{renglones.producto}}
+                    <td><button type="submit">BORRAR</button></td>
+                    </form>
+                </td>
+
+                <td>
+                   {{renglones.cantidad}}
+                </td>
+
+                <td>
+                    <form action="../../ops/edicion_dinamica/{{id}}" method="POST">
+                    {% csrf_token %}
+                    <input type='hidden' value='{{renglones.idrenglon}}' name='actualizar'>
+                    <input type="number" name='ncantidad'>
+                    <button type="submit">ACTUALIZAR CANTIDAD</button>
+                    </form>
+                </td>
+                <td>{{renglones.costo}}</td>
+            </tr>{% endfor %}
+        </tbody>
+     </table>
+     
+     
+    <h4><a href="../../ops/vd_remito_terminado/{{id}}">VER REMITO PARA IMPRESION </h4></a>
+    {% endblock %}
+</body>
+</html>

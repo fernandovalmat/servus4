@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+
+    <H3>REGISTRO DE MOVIMIENTOS TOTALES DEL HMNCK</H3>
+
+    {{remitos}}
+     <table>
+        <thead>
+            <tr>
+                <th>PRODUCTO</th>
+                <th>INGRESO TOTAL</th>
+                
+            </tr> 
+        </thead>   
+    
+        <tbody>
+            <tr>{% for stock_prod in stock_prod %}
+                <td>{{stock_prod.producto}} </td>
+                <td>{{stock_prod.ingreso_nck}}</td>
+                
+            </tr>{% endfor %}
+        </tbody>
+    </table>
+    
+
+    {% endblock %}
+</body>
+</html>

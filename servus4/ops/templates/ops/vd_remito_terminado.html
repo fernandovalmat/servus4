@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}'>
+    <title>Document</title>
+</head>
+<body>
+    <div class="remito">
+
+    
+    {% for remito in remito %}
+    <div><h3>N° remito : {{remito.idremito}}</h3></div>
+    <div>Fecha: {{remito.fecha_remito}} </div>
+    <div>Origen: {{remito.origen}} </div>
+    <div>Destino: {{remito.destino}}</div>
+   
+    {% endfor %}
+    
+    {% for renglones in renglones %}
+    <table>
+        <tr>
+            <td>{{renglones.producto}} </td>
+            <td>{{renglones.cantidad}}</td>
+        </tr>
+    </table>
+    {% endfor %}
+    </div>
+</body>
+</html>

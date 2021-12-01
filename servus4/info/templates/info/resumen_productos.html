@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+
+    {% block content %}
+    <table>
+        <thead>
+            <tr>
+            <td>SEGUN NUMERO DE UNIDADES</td>
+            <TD>SEGUN COSTO PROMEDIO</TD>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    {% for egreso in egreso %}
+                    <li>{{egreso.producto}}</li>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for costo in costo %}
+                    <li>{{costo.producto}}</li>
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+        
+    </table>
+    
+
+
+    {% endblock %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    <nav class= 'menu li'>
+        <a href="../consumo_unidad_total/{{idc.idcentro}}">CONSUMO TOTAL</a>
+        <a href="../consumo_mensual_centro/{{idc.idcentro}}">CONSUMO MENSUAL</a>
+        <a href="../consumo_historico_centro/{{idc.idcentro}}">CONSUMO HISTORICO</a>
+        <a href="../evolucion_centro/{{idc.idcentro}}">MENSUALES</a>
+    </nav>
+
+    <form action="../../inf/consumo_mensual_centro/{{idc.idcentro}}" method="post">
+        {% csrf_token %}
+        <select name='mes'>
+            <option value="2021-10-31">OCTUBRE - 2021 </option>
+            <option value="2021-11-30">NOVIEMBRE - 2021 </option>
+            <option value="2021-12-31">DICIEMBRE - 2021</option>
+            <option value="2022-01-31">ENERO - 2022</option>
+            <option value="2022-02-28">FEBRERO - 2022</option>
+            <option value="2022-03-31">MARZO - 2022</option>
+        </select>
+        <button type="submit">VER</button>
+    </form>
+
+    <h3>{{idc.nombre_centro}}</h3>
+    <h4>RESULTADO DEL MES :{{mes}} del año {{mes4}}</h4>
+    <h3><div>Total consumo x unidad monetizado: {{costo_total.costo__sum}}</div></h3>
+
+
+    <table>
+        <thead>
+            <tr>
+                <td>PRODUCTO</td>
+                <TD>CANTIDAD</TD>
+                <td>COSTO</td>
+            </tr>
+        </thead>
+        <tbody>
+            <TR>{% for consumo in consumo %}
+                <TD>{{consumo.producto}}</TD>
+                <TD>{{consumo.cantidad}}</TD>
+                <TD>{{consumo.costo}}</TD>
+            </TR>{% endfor %}
+        </tbody>
+        
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endblock %}
+</body>
+</html>

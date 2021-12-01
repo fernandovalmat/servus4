@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+
+    <div><header class="encabezado"><h3>{{idc.nombre_centro}}</h3></header></div>
+    
+    <nav class= "menu li">
+        <li><a href="../consumo_unidad_total/{{idc.idcentro}}">CONSUMO TOTAL</a></li>
+        <li><a href="../consumo_mensual_centro/{{idc.idcentro}}">CONSUMO MENSUAL</a></li>
+        <li><a href="../consumo_historico_centro/{{idc.idcentro}}">CONSUMO HISTORICO</a></li>
+        <li><a href="../evolucion_centro/{{idc.idcentro}}">COSTOS MENSUALES</a></li>
+        <li><a href="../medias/{{idc.idcentro}}">PROMEDIOS</a></li>
+    </nav>
+    <h3>CONSUMO HISTORICO DEL CENTRO {{idc}}</h3>
+
+  <table>
+      <thead>
+          <tr>
+              <tH>PRODUCTO</th>
+              <th>AÑO</th>
+              <th>MES</th>
+              <Th>CANTIDAD</Th>
+          </tr>
+      </thead>
+      {% for consumo in consumo %}
+      <tbody>
+          <tr>
+              <TD>{{consumo.producto}}</TD>
+              <td>{{consumo.anio}}</td>
+              <td>{{consumo.mes}}</td>
+              <TD>{{consumo.cantidad}}</TD>
+            </tr>
+      </tbody>
+      {% endfor %}
+  </table>
+  
+    
+    
+    
+
+
+
+    <div></div>
+    {{a}}
+    {% endblock %}
+</body>
+</html>

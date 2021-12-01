@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends 'core/home_un.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/stilos.css" %}' >
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    
+    <table>
+        <thead>
+         <tr>
+            <td><a href="inf/consumo_total">CONSUMO GLOBAL</a></td>
+            <td><a href="inf/consumo_interno_nck_total">CONSUMO INTERNO NCK</a></td>
+            <td><a href="inf/calculo_stock">STOCK UMAAD</a></td>
+            <td><a href="inf/stock_vd/2">STOCK NCK</a></td>
+            <td><a href="inf/consumo_centro">PANEL DE CONTROL POR CENTRO</a></td>
+            
+        </tr>   
+        </thead>
+        
+    </table>
+    
+    
+    
+
+
+
+    {% endblock %}
+</body>
+</html>
